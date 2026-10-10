@@ -12,16 +12,21 @@ let
     { goos = "darwin"; goarch = "amd64"; }
     { goos = "darwin"; goarch = "arm64"; }
   ];
+
+  # internal/reach/types.go. The helper must report exactly this, or reach's
+  # post-upload selftest sees a mismatch and reinstalls it on every connect.
+  reachVersion = "0.8.0";
+  rev = "98d74ac166712fab869601fd1f43077d6c7b8d84";
 in
 buildGoModule (finalAttrs: {
   pname = "agentreach";
-  version = "0.8.0";
+  version = "${reachVersion}-unstable-2026-10-10";
 
   src = fetchFromGitHub {
-    owner = "bojieli";
+    owner = "arielherself";
     repo = "agentreach";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-PL+YtRf+5L2j7WgpDNQn4DssPwGbA95iWKqNJ+U3FME=";
+    inherit rev;
+    hash = "sha256-C1krYu7rSggXBFU3LiYdL3Mw4pucwscwYd/T7+GEuDc=";
   };
 
   # go.mod has no requirements.
@@ -35,7 +40,7 @@ buildGoModule (finalAttrs: {
     "-s"
     "-w"
     "-X main.buildVersion=${finalAttrs.version}"
-    "-X main.buildCommit=v${finalAttrs.version}"
+    "-X main.buildCommit=${builtins.substring 0 7 rev}"
   ];
 
   # reach looks for reach-helper-<os>-<arch> beside its own (symlink-resolved)
@@ -44,7 +49,7 @@ buildGoModule (finalAttrs: {
   postBuild = lib.concatMapStrings
     ({ goos, goarch }: ''
       GOOS=${goos} GOARCH=${goarch} CGO_ENABLED=0 GOFLAGS=-trimpath \
-        go build -ldflags "-s -w -X main.version=${finalAttrs.version}" \
+        go build -ldflags "-s -w -X main.version=${reachVersion}" \
         -o helpers/reach-helper-${goos}-${goarch} ./cmd/reach-helper
     '')
     helperPlatforms;
@@ -65,14 +70,14 @@ buildGoModule (finalAttrs: {
   doInstallCheck = true;
   installCheckPhase = ''
     runHook preInstallCheck
-    $out/bin/reach --version | grep -F ${finalAttrs.version}
+    $out/bin/reach --version | grep -F ${reachVersion}
     runHook postInstallCheck
   '';
 
   meta = {
     description = "Point your coding agent at any box you can SSH into, without installing the agent on the server";
-    homepage = "https://github.com/bojieli/agentreach";
-    changelog = "https://github.com/bojieli/agentreach/blob/v${finalAttrs.version}/CHANGELOG.md";
+    homepage = "https://github.com/arielherself/agentreach";
+    changelog = "https://github.com/arielherself/agentreach/blob/${rev}/CHANGELOG.md";
     license = lib.licenses.mit;
     sourceProvenance = [ lib.sourceTypes.fromSource ];
     maintainers = [

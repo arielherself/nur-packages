@@ -8,7 +8,7 @@
 
 | Attribute    | Description |
 | ------------ | ----------- |
-| `agentreach` | [AgentReach](https://github.com/bojieli/agentreach) (`reach`): point your coding agent at any box you can SSH into, without installing the agent on the server. Ships the `reach-helper` builds for linux/darwin × amd64/arm64 targets. |
+| `agentreach` | [AgentReach](https://github.com/arielherself/agentreach) (my fork of [bojieli/agentreach](https://github.com/bojieli/agentreach)) (`reach`): point your coding agent at any box you can SSH into, without installing the agent on the server. Ships the `reach-helper` builds for linux/darwin × amd64/arm64 targets. |
 
 ## Usage
 
