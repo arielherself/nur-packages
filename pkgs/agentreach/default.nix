@@ -74,6 +74,14 @@ buildGoModule (finalAttrs: {
     homepage = "https://github.com/bojieli/agentreach";
     changelog = "https://github.com/bojieli/agentreach/blob/v${finalAttrs.version}/CHANGELOG.md";
     license = lib.licenses.mit;
+    sourceProvenance = [ lib.sourceTypes.fromSource ];
+    maintainers = [
+      {
+        name = "arielherself";
+        github = "arielherself";
+        githubId = 107245128;
+      }
+    ];
     mainProgram = "reach";
     platforms = lib.platforms.unix;
   };
