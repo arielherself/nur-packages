@@ -8,7 +8,8 @@
 
 | Attribute    | Description |
 | ------------ | ----------- |
-| `agentreach` | [AgentReach](https://github.com/arielherself/agentreach) (my fork of [bojieli/agentreach](https://github.com/bojieli/agentreach)) (`reach`): point your coding agent at any box you can SSH into, without installing the agent on the server. Ships the `reach-helper` builds for linux/darwin × amd64/arm64 targets. |
+| `agentreach` | [AgentReach](https://github.com/arielherself/agentreach) (my fork of [bojieli/agentreach](https://github.com/bojieli/agentreach)) (`reach`): point your coding agent at any box you can SSH into, without installing the agent on the server. Also provides `reach-shell-prefix`, and ships the `reach-helper` builds for linux/darwin × amd64/arm64 targets. |
+| `gameshelf`  | [gameshelf](https://github.com/arielherself/gameshelf): TUI game launcher for Windows games on Linux via umu-launcher and Proton. Falls back to nixpkgs' `umu-launcher` when no `umu-run` is on `PATH`. |
 
 ## Usage
 

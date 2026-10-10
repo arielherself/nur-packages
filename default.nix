@@ -17,4 +17,5 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   agentreach = pkgs.callPackage ./pkgs/agentreach { };
+  gameshelf = pkgs.callPackage ./pkgs/gameshelf { };
 }
