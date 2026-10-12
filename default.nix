@@ -18,4 +18,5 @@
 
   agentreach = pkgs.callPackage ./pkgs/agentreach { };
   gameshelf = pkgs.callPackage ./pkgs/gameshelf { };
+  rplayhub = pkgs.callPackage ./pkgs/rplayhub { };
 }
