@@ -59,6 +59,13 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-xQ+TguD/NcxYzowJviJqcYTXm6KiAqdVimSqeRUoI1I=";
   };
 
+  patches = [
+    # From upstream main (21968b4): with RPLAY_USERSPACE_NET=1 the mounter's
+    # socket is lwIP's, but send_plist used the kernel's send(), so RSDCheckin
+    # never went out and the DDI never mounted, leaving no screen to capture.
+    ./ddi-write-over-tunnel.patch
+  ];
+
   nativeBuildInputs = [
     makeWrapper
     nasm
