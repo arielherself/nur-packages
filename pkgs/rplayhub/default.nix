@@ -64,6 +64,11 @@ stdenv.mkDerivation (finalAttrs: {
     # socket is lwIP's, but send_plist used the kernel's send(), so RSDCheckin
     # never went out and the DDI never mounted, leaving no screen to capture.
     ./ddi-write-over-tunnel.patch
+    # Under motion the encoder drops to 1088x1920 or 720x1280, squeezing the
+    # whole screen into that rect anamorphically; the GUI took the rect's own
+    # aspect and stretched the picture sideways. Present at the device's
+    # screen aspect instead, as upstream main (21968b4) does for the mirror.
+    ./gui-present-at-screen-aspect.patch
   ];
 
   nativeBuildInputs = [
